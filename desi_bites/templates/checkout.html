@@ -9,7 +9,7 @@
   <h1 class="mb-3 mt-5 bread text-center">Checkout</h1>
   <div class="container">
     <div class="row">
-      <div class="col-xl-8 ftco-animate">
+      <div class="col-md-12 ftco-animate">
         <form action="#" class="billing-form ftco-bg-dark p-3 p-md-5">
           <h3 class="mb-4 billing-heading">Billing Details</h3>
           <div class="row align-items-end">
@@ -40,8 +40,8 @@
             </div>
         </form><!-- END -->
 
-        <div class="row mt-5 pt-3 d-flex">
-          <div class="col-md-6 d-flex">
+        <div class="row mt-3 pt-3 d-flex">
+          <div class="col-md-12 d-flex">
             <div class="cart-detail cart-total ftco-bg-dark p-3 p-md-4">
               <h3 class="billing-heading mb-4">Cart Total</h3>
               <hr>
@@ -53,23 +53,8 @@
           </div>
           <div class="col-md-12">
             <div class="cart-detail ftco-bg-dark p-3 p-md-8">
-              <h3 class="billing-heading mb-4">Payment Method</h3>
-              <div class="form-group">
-                <div class="col-md-6">
-                  <div class="radio">
-                     <label><input type="radio" name="optradio" class="mr-4"> Pay online </label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-6">
-                  <div class="radio">
-                     <label><input type="radio" name="optradio" class="mr-4"> Cash on delivery </label>
-                  </div>
-                </div>
-              </div>
-              
-              <p><a href="#"class="btn btn-primary py-3 px-4">Place an order</a></p>
+              <h6 class="billing-heading mb-4">Pay cash/online on delivery</h6>
+              <input type="submit" value="Place Your Order" class="btn btn-primary py-3 px-4" onclick="submitOrderForm()" />
             </div>
           </div>
         </div>
