@@ -1,4 +1,4 @@
-   // Function to handle quantity changes
+
 // Function to handle quantity changes
 function updateQuantity(itemId, operation, step) {
     var quantityField = document.getElementById('quantity' + itemId);
@@ -74,13 +74,13 @@ document.querySelectorAll('.quantity-right-plus').forEach(function (button) {
                     <h3>${item.name}</h3>
                     
                 </td>
-                <td class="price">$${item.price}</td>
+                <td class="price">₹${item.price}</td>
                 <td class="quantity">
                     <div class="input-group mb-3">
                         <input type="text" name="quantity" class="quantity form-control input-number" value="${item.quantity}" min="1" max="100">
                     </div>
                 </td>
-                <td class="total">$${calculateTotalPrice(item)}</td>
+                <td class="total">₹${calculateTotalPrice(item)}</td>
                 <td class="product-remove"><a href="#" onclick="removeCartItem('${item.id}')"><span class="icon-close"></span></a></td>
             `;
             cartTableBody.appendChild(row);
@@ -90,8 +90,10 @@ document.querySelectorAll('.quantity-right-plus').forEach(function (button) {
         var subtotal = cartItems.reduce((sum, item) => sum + parseFloat(item.price) * parseInt(item.quantity), 0).toFixed(2);
         var total = (parseFloat(subtotal) + parseFloat(40) );
 
-        document.getElementById('subtotal').innerText = `$${subtotal}`;
-        document.getElementById('total').innerText = `$${total}`;
+        localStorage.setItem('total', total)
+
+        document.getElementById('subtotal').innerText = `₹${subtotal}`;
+        document.getElementById('total').innerText = `₹${total}`;
     }
 
     // Function to add an item to the cart
