@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from myapp import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,7 +12,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/accounts/', include('accounts.urls')),
-    path('api/', include('accounts.urls')),
+    path('api/book/', include('bookings.urls')),
     path('', include('myapp.urls'))
 ]  
 
