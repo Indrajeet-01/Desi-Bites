@@ -3,7 +3,7 @@ from django.core.validators import RegexValidator
 
 class Reservation(models.Model):
     name = models.CharField(max_length=255)
-    email = models.EmailField()
+    
     phone = models.CharField(max_length=10,validators=[RegexValidator(r'^\d{10}$', message='Phone number must be 10 digits')])
 
     date = models.DateField()

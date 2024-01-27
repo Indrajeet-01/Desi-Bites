@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.css">
 
 <section class="home-slider owl-carousel">
 
@@ -45,39 +46,40 @@
 
       <div class="book p-4">
         <h3>Book a Table</h3>
-        <form action="#" class="appointment-form">
+        <form id="booking-form" action="{% url 'bookings-create' %}" method="post" class="appointment-form">
+          {% csrf_token %}
           <div class="d-md-flex">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Name" required>
+              <input type="text" name="name" class="form-control" placeholder="Name" required>
             </div>
           </div>
           <div class="d-md-flex">
             <div class="form-group">
-              <input type="tel" class="form-control" placeholder="Phone" pattern="[0-9]{10}" required>
+              <input type="tel" name="phone" class="form-control" placeholder="Phone" pattern="[0-9]{10}" required>
             </div>
           </div>
           <div class="d-md-flex">
             <div class="form-group">
               <div class="input-wrap">
             <div class="icon"><span class="ion-md-calendar"></span></div>
-            <input type="text" class="form-control appointment_date" placeholder="Date" required>
+            <input type="text" name="date" class="form-control appointment_date" placeholder="Date" required>
             </div>
             </div>
             <div class="form-group ml-md-6">
               <div class="input-wrap">
             <div class="icon"><span class="ion-ios-clock"></span></div>
-            <input type="text" class="form-control appointment_time" placeholder="Time">
+            <input type="text" name="time" class="form-control appointment_time" placeholder="Time">
             </div>
             </div>
           </div>
           <div class="d-md-flex">
             <div class="form-group">
-              <input type="number" class="form-control" placeholder="Number of guests" required>
+              <input type="number" name="guests" class="form-control" placeholder="Number of guests" required>
             </div>
           </div>
           <div class="d-md-flex">
             <div class="form-group">
-            <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+            <textarea name="message" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
             </div>
             
           </div>
@@ -93,6 +95,9 @@
 </section>
 
 <div id="map"></div>
+
+<script src="/static/js/reserve.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.all.min.js"></script>
 
 <script src="/static/js/google-map.js"></script>
 

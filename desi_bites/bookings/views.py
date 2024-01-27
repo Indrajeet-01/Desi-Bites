@@ -2,7 +2,7 @@ from rest_framework import permissions
 from rest_framework.views import APIView
 from django.core.mail import send_mail
 from rest_framework.response import Response
-from .models import Reservation
+
 from .forms import ReservationForm
 
 class BookingsCreateView(APIView):
@@ -21,7 +21,7 @@ class BookingsCreateView(APIView):
 
                     Name: {reservation_instance.name}
                     Phone: {reservation_instance.phone}
-                    Email: {reservation_instance.email}
+                    
                     Date: {reservation_instance.date}
                     Time: {reservation_instance.time}
                     Guests: {reservation_instance.guests}
@@ -38,5 +38,8 @@ class BookingsCreateView(APIView):
                 )
                 
                 return Response({'success': 'Table booked successfully'})
+            else:
+                # Return a response indicating that the form is not valid
+                return Response({'error': 'Form validation failed'})
         except Exception as e:
             return Response({'error': f'Failed to book the table. Error: {str(e)}'})
