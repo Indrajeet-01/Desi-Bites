@@ -15,7 +15,7 @@
 
 		  <div class="col-md-7 col-sm-12 text-center ftco-animate">
 			  <h1 class="mb-3 mt-5 bread">Our Menu</h1>
-			  <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home</a></span> <span>Menu</span></p>
+			  
 		  </div>
 
 		</div>
@@ -26,7 +26,13 @@
 
 <section class="ftco-section">
     <div class="container">
-        
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">Discover</span>
+                <h2 class="mb-4">Our Products</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+            </div>
+        </div>
             <div class="row">
 				{% for category in categories %}
                 <div class="col-md-6 mb-5 pb-3">
@@ -37,7 +43,7 @@
                             <div class="desc pl-3">
                                 <div class="d-flex text align-items-center">
                                     <h3><span>{{ item.name }}</span></h3>
-                                    <span class="price">${{ item.price }}</span>
+                                    <span class="price">₹{{ item.price }}</span>
                                 </div>
                                 <div class="d-block">
                                     <p>{{ item.description }}</p>
@@ -58,9 +64,9 @@
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-md-7 heading-section text-center ftco-animate">
-                <span class="subheading">Discover</span>
-                <h2 class="mb-4">Our Products</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <span class="subheading">To Order Online</span>
+                <h2 class="mb-4">Select Our Products from Below </h2>
+                <p>According to your choice, you can select products from different category. Select quantity & add them into cart.</p>
             </div>
         </div>
 
@@ -87,22 +93,23 @@
                                                     <div class="text">
                                                         <h3><a href="{% url 'singleItem' item_id=item.id %}">{{ item.name }}</a></h3>
                                                         <p>{{ item.description }}</p>
-                                                        <p class="price"><span>${{ item.price }}</span></p>
+                                                        <p class="price"><span>₹{{ item.price }}</span></p>
 														<div class="row d-flex justify-content-center align-content-center">
-															<div class="col-sm-1">
-																<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="quantity{{ item.id }}">
-																	<i class="icon-minus"></i>
-																</button>
-															</div>
-															<div class="col-sm-1">
-																<input type="text" id="quantity{{ item.id }}" name="quantity{{ item.id }}" class="form-control input-number" value="1" min="1" max="100">
-															</div>
-															<div class="col-sm-1">
-																<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="quantity{{ item.id }}">
-																	<i class="icon-plus"></i>
-																</button>
-															</div>
-														</div>
+                                                            <div class="col-sm-1">
+                                                                <button type="button" id="decrease" class="quantity-left-minus btn" data-type="minus" data-field="quantity{{ item.id }}">
+                                                                    <i class="icon-minus"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <input type="text" id="quantity{{ item.id }}" name="quantity{{ item.id }}" class="form-control input-number" value="1" min="1" max="100">
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <button type="button" id="increase" class="quantity-right-plus btn" data-type="plus" data-field="quantity{{ item.id }}">
+                                                                    <i class="icon-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        
                                                         <p><a href="#" class="btn btn-primary btn-outline-primary" onclick="addToCart('{{ item.id }}', '{{ item.name }}', '{{ item.price }}', '{{ item.image }}')">Add to cart</a></p>
                                                     </div>
 													
@@ -120,6 +127,7 @@
         </div>
     </div>
 </section>
+
 
 
 

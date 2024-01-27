@@ -1,25 +1,33 @@
    // Function to handle quantity changes
-function updateQuantity(itemId, operation) {
+// Function to handle quantity changes
+function updateQuantity(itemId, operation, step) {
     var quantityField = document.getElementById('quantity' + itemId);
     var currentQuantity = parseInt(quantityField.value);
 
     if (operation === 'plus') {
-        quantityField.value = currentQuantity + 1;
-    } else if (operation === 'minus' && currentQuantity > 1) {
-        quantityField.value = currentQuantity - 1;
+        quantityField.value = (currentQuantity + step).toString();
+    } else if (operation === 'minus' && currentQuantity > step) {
+        quantityField.value = (currentQuantity - step).toString();
     }
 
     // If you need to do something else with the quantity, add your logic here
 }
 
 // Add event listeners for quantity buttons
-document.querySelectorAll('.quantity-left-minus, .quantity-right-plus').forEach(function (button) {
-    button.addEventListener('click', function () {
+document.querySelectorAll('.quantity-left-minus').forEach(function (button) {
+    button.onclick = function () {
         var itemId = button.getAttribute('data-field').replace('quantity', '');
-        var operation = button.getAttribute('data-type');
-        updateQuantity(itemId, operation);
-    });
+        updateQuantity(itemId, 'minus', 1);
+    };
 });
+
+document.querySelectorAll('.quantity-right-plus').forEach(function (button) {
+    button.onclick = function () {
+        var itemId = button.getAttribute('data-field').replace('quantity', '');
+        updateQuantity(itemId, 'plus', 1);
+    };
+});
+
 
     // Function to get cart items from local storage
     function getCartItems() {
