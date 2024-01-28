@@ -1,56 +1,85 @@
-
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
 
-
 <section class="ftco-section ftco-cart">
-	<h1 class="mb-3 mt-5 bread text-center">Cart</h1>
+    <h1 class="mb-3 mt-5 bread text-center">Cart</h1>
     <div class="container">
-      <div class="row">
-        <div class="col-md-12 ftco-animate">
-          <div class="cart-list">
-            <table class="table">
-              <thead class="thead-primary">
-                <tr class="text-center">
-                  
-                  <th>&nbsp;</th>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total</th>
-				  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody id="cart-table-body">
-                <!-- Cart items will be dynamically added here using JavaScript -->
-              </tbody>
-            </table>
-          </div>
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+                                <th>&nbsp;</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-table-body">
+                            {% for item_id, item_data in request.session.cart.items %}
+                                <tr>
+                                    
+                                    <td class="image-prod">
+                                        {% if item_data.image %}
+                                            <div class="img" style="background-image:url('{{ item_data.image }}');"></div>
+                                        {% else %}
+                                            <p>No Image</p>
+                                        {% endif %}
+                                    </td>
+                                    <td class="product-name">
+                                        {% if item_data.name %}
+                                            <h3>{{ item_data.name }}</h3>
+                                        {% else %}
+                                            <p>No Name</p>
+                                        {% endif %}
+                                    </td>
+                                    <td class="price">₹{{ item_data.price }}</td>
+                                    <td class="quantity">{{ item_data.quantity }}</td>
+                                    <td>
+                                      {% if item_data.total %}
+                                          <h5>{{ item_data.total }}</h5>
+                                          {% else %}
+                                            <p>No Total</p>
+                                          {% endif %}
+                                    </td>
+                                    <form method="post" action="{% url 'remove_from_cart' %}">
+                                      {% csrf_token %}
+                                      <input type="hidden" name="item_id" value="{{ item_id }}">
+                                      <td class="product-remove" style="width: 50px; text-align: center;">
+                                          <button type="submit" class="btn-link" style="border: none;  background-color: rgb(225, 60, 60); cursor: pointer; line-height: 50px;">
+                                              <span class="ion-ios-close" style="font-size: 50px; "></span>
+                                          </button>
+                                      </td>
+                                  </form>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row justify-content-end">
-        <div class="col col-lg-3 col-md-6 mt-5 cart-wrap ftco-animate">
-          <div class="cart-total mb-3">
-            <h3>Cart Totals</h3>
-            <p class="d-flex">
-              <span>Subtotal</span>
-              <span id="subtotal">₹0.00</span>
-            </p>
-            <!-- Add other totals as needed -->
-            <hr>
-            <p class="d-flex total-price">
-              <span>Total</span>
-              <span id="total">₹0.00</span>
-            </p>
-          </div>
-          <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+        <div class="row justify-content-end">
+            <div class="col col-lg-3 col-md-6 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Cart Totals</h3>
+                    <p class="d-flex">
+                        <span>Subtotal</span>
+                        <span id="subtotal">₹{{ total }}</span>
+                    </p>
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span id="total">₹{{ total }}</span>
+                    </p>
+                </div>
+                <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-
-
-<script src="/static/js/cart.js"></script>
+</section>
 
 {% endblock %}

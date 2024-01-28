@@ -94,23 +94,29 @@
                                                         <h3><a href="{% url 'singleItem' item_id=item.id %}">{{ item.name }}</a></h3>
                                                         <p>{{ item.description }}</p>
                                                         <p class="price"><span>₹{{ item.price }}</span></p>
-														<div class="row d-flex justify-content-center align-content-center">
-                                                            <div class="col-sm-1">
-                                                                <button type="button" id="decrease" class="quantity-left-minus btn" data-type="minus" data-field="quantity{{ item.id }}">
-                                                                    <i class="icon-minus"></i>
-                                                                </button>
+
+                                                        <form method="post" action="{% url 'add_to_cart' item_id=item.id %}">
+                                                            {% csrf_token %}
+                                                            <div class="row d-flex justify-content-center align-content-center">
+                                                                <div class="col-sm-1">
+                                                                    <button type="button" class="quantity-btn btn" data-type="minus" data-field="quantity{{ item.id }}">
+                                                                        <i class="icon-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <input type="text" id="quantity{{ item.id }}" name="quantity" class="form-control input-number" value="1" min="1" max="100" style="margin-left: 10px;">
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <button type="button" class="quantity-btn btn" data-type="plus" data-field="quantity{{ item.id }}">
+                                                                        <i class="icon-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <button type="submit" class="btn btn-primary btn-outline-primary">Add to Cart</button>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-1">
-                                                                <input type="text" id="quantity{{ item.id }}" name="quantity{{ item.id }}" class="form-control input-number" value="1" min="1" max="100" style="margin-left: 10px; ">
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <button type="button" id="increase" class="quantity-right-plus btn" data-type="plus" data-field="quantity{{ item.id }}">
-                                                                    <i class="icon-plus"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
+                                                        </form>
                                                         
-                                                        <p><a href="#" class="btn btn-primary btn-outline-primary" onclick="addToCart('{{ item.id }}', '{{ item.name }}', '{{ item.price }}', '{{ item.image }}')">Add to cart</a></p>
                                                     </div>
 													
                                                 </div>
@@ -132,6 +138,6 @@
 
 
 
-<script src="/static/js/cart.js"></script>
+
 
 {% endblock %}

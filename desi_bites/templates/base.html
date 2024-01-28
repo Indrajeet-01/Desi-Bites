@@ -52,7 +52,7 @@
               </div>
             </li>
 	          <li class="nav-item"><a href="{% url 'reserve' %}" class="nav-link">Book</a></li>
-	          <li class="nav-item cart"><a href="{% url 'cart' %}" class="nav-link"><span class="icon icon-shopping_cart"></span><span class="bag d-flex justify-content-center align-items-center"><small id="cart-length">0</small></span></a></li>
+	          <li class="nav-item cart"><a href="{% url 'view_cart' %}" class="nav-link"><span class="icon icon-shopping_cart"></span><span class="bag d-flex justify-content-center align-items-center"><small id="cart-length">{{ request.session.cart|length }}</small></span></a></li>
 	        </ul>
 	      </div>
 		  </div>
@@ -127,7 +127,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="/static/js/google-map.js"></script>
   <script src="/static/js/main.js"></script>
-  <script src="/static/js/cart.js"></script>
+  
     
   </body>
 </html>

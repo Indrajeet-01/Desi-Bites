@@ -22,6 +22,8 @@ function submitOrderForm() {
     var cartItems = getCartItems();
     var total = localStorage.getItem('total');
 
+    console.log(total)
+
     // Extract relevant data from cart items
     var itemsData = cartItems.map(item => ({
         id: item.id,
