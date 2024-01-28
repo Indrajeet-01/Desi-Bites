@@ -46,6 +46,7 @@ def view_cart(request):
     for item_data in cart.values():
         item_data['total'] = float(item_data['quantity']) * float(item_data['price'])
     total = sum(item_data['total'] for item_data in cart.values())
+    request.session['cart_total'] = total
     return render(request, 'cart.html', {'cart': cart, 'total': total})
 
 def remove_from_cart(request):
